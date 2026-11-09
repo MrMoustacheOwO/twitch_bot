@@ -1,0 +1,56 @@
+twitch:
+  channel: "your_channel_name"
+  bot_token: "oauth:xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  client_id: "your_client_id"
+  # URL потока для захвата аудио/видео (streamlink или прямой rtmp)
+  stream_url: "https://www.twitch.tv/your_channel_name"
+
+database:
+  url: "postgresql+asyncpg://postgres:password@localhost:5432/twitch_bot"
+
+ollama:
+  base_url: "http://localhost:11434"
+  llm_model: "qwen3:14b"
+  vision_model: "qwen2.5-vl:7b"
+  # Максимум параллельных запросов к Ollama (зависит от VRAM)
+  max_concurrent: 3
+  timeout_sec: 15
+
+stt:
+  model_size: "large-v3"
+  language: "ru"
+  device: "cuda"
+  compute_type: "float16"
+  # Размер буфера аудио в секундах
+  chunk_duration_sec: 5
+  # Минимальная длина фразы для сохранения
+  min_phrase_len: 3
+
+vision:
+  # Интервал между анализами кадра (секунд)
+  capture_interval_sec: 10
+  # Разрешение для анализа
+  frame_width: 1280
+  frame_height: 720
+
+context:
+  # Количество хранимых сообщений чата
+  chat_history_size: 100
+  # Количество последних реплик стримера
+  streamer_speech_size: 10
+  # Интервал публикации нового StreamSnapshot (секунд)
+  snapshot_interval_sec: 5
+
+bots:
+  # Путь к JSON с профилями ботов
+  profiles_path: "config/bots.json"
+  # Глобальный лимит: не более N сообщений в минуту суммарно
+  global_rate_limit_per_min: 20
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+
+logging:
+  level: "INFO"
+  file: "logs/bot.log"
